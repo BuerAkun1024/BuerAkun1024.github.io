@@ -155,28 +155,27 @@
           <div id="js-content" class="content-ll">
             
   
-    <article id="post-我的第一篇博客文章" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+    <article id="post-自我介绍" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2021/03/29/%E6%88%91%E7%9A%84%E7%AC%AC%E4%B8%80%E7%AF%87%E5%8D%9A%E5%AE%A2%E6%96%87%E7%AB%A0/">我的第一篇博客文章</a>
+      <a class="article-title" href="/2021/04/26/%E8%87%AA%E6%88%91%E4%BB%8B%E7%BB%8D/">自我介绍</a>
     </h1>
   
 
         
-        <a href="/2021/03/29/%E6%88%91%E7%9A%84%E7%AC%AC%E4%B8%80%E7%AF%87%E5%8D%9A%E5%AE%A2%E6%96%87%E7%AB%A0/" class="archive-article-date">
-  	<time datetime="2021-03-29T12:49:54.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-03-29</time>
+        <a href="/2021/04/26/%E8%87%AA%E6%88%91%E4%BB%8B%E7%BB%8D/" class="archive-article-date">
+  	<time datetime="2021-04-26T03:53:17.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-04-26</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="第一章"><a href="#第一章" class="headerlink" title="第一章"></a>第一章</h2><p>春眠不觉晓<br>为有暗香来</p>
-<h2 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h2>
+        <h3 id="Name：BuerAkun"><a href="#Name：BuerAkun" class="headerlink" title="Name：BuerAkun"></a>Name：BuerAkun</h3>
       
 
       
@@ -188,7 +187,7 @@
 
       
         <p class="article-more-link">
-          <a class="article-more-a" href="/2021/03/29/%E6%88%91%E7%9A%84%E7%AC%AC%E4%B8%80%E7%AF%87%E5%8D%9A%E5%AE%A2%E6%96%87%E7%AB%A0/">展开全文 >></a>
+          <a class="article-more-a" href="/2021/04/26/%E8%87%AA%E6%88%91%E4%BB%8B%E7%BB%8D/">展开全文 >></a>
         </p>
       
 
@@ -218,39 +217,50 @@
 
 
   
-    <article id="post-hello-world" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+    <article id="post-分频器-md" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2021/03/29/hello-world/">Hello World</a>
+      <a class="article-title" href="/2021/04/26/%E5%88%86%E9%A2%91%E5%99%A8-md/">Verilog语言实现2分频、3分频、4分频、8分频+产生指定频率的时钟周期</a>
     </h1>
   
 
         
-        <a href="/2021/03/29/hello-world/" class="archive-article-date">
-  	<time datetime="2021-03-29T12:26:43.876Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-03-29</time>
+        <a href="/2021/04/26/%E5%88%86%E9%A2%91%E5%99%A8-md/" class="archive-article-date">
+  	<time datetime="2021-04-26T03:48:32.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-04-26</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>Welcome to <a target="_blank" rel="noopener" href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a target="_blank" rel="noopener" href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a target="_blank" rel="noopener" href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a target="_blank" rel="noopener" href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre></td></tr></table></figure>
+        <h3 id="1-一个计数器就可以搞定：偶数次分频"><a href="#1-一个计数器就可以搞定：偶数次分频" class="headerlink" title="1.一个计数器就可以搞定：偶数次分频"></a>1.一个计数器就可以搞定：偶数次分频</h3><p><strong>如果在一个大模块中同时实现四分频、八分频，书写形式有两种：</strong></p>
+<figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//第一种四分频、八分频写法</span></span><br><span class="line"><span class="keyword">reg</span> [<span class="number">1</span>:<span class="number">0</span>] div_cnt1;</span><br><span class="line"><span class="keyword">always</span>@(<span class="keyword">posedge</span> clk_i <span class="keyword">or</span> <span class="keyword">negedge</span> rst_n_i)</span><br><span class="line"><span class="keyword">begin</span></span><br><span class="line">	<span class="keyword">if</span>(!rst_n_i)</span><br><span class="line">		div_cnt1&lt;=<span class="number">2&#x27;b00</span>;</span><br><span class="line">	<span class="keyword">else</span></span><br><span class="line">		div_cnt1&lt;=div_cnt1+<span class="number">1&#x27;b1</span>;</span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">always</span>@(<span class="keyword">posedge</span> clk_i <span class="keyword">or</span> <span class="keyword">negedge</span> rst_n_i)  <span class="comment">//四分频 </span></span><br><span class="line"><span class="keyword">begin</span>                                      <span class="comment">//计数器放在外面 来实现计数   div_cnt1</span></span><br><span class="line">	<span class="keyword">if</span>(!rst_n_i)                           <span class="comment">//00 01 10 11 捕捉00和10 实现四分频</span></span><br><span class="line">		div4_o_r&lt;=<span class="number">1&#x27;b0</span>;</span><br><span class="line">	<span class="keyword">else</span> <span class="keyword">if</span>(div_cnt1==<span class="number">2&#x27;b00</span> || div_cnt1==<span class="number">2&#x27;b10</span>)</span><br><span class="line">		div4_o_r&lt;=~div4_o_r;</span><br><span class="line">	<span class="keyword">else</span></span><br><span class="line">		div4_o_r&lt;=div4_o_r;</span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">always</span>@(<span class="keyword">posedge</span> clk_i <span class="keyword">or</span> <span class="keyword">negedge</span> rst_n_i)  <span class="comment">//八分频</span></span><br><span class="line"><span class="keyword">begin</span>                                      <span class="comment">//基于同一个计数器实现计数  注意比较方式</span></span><br><span class="line">	<span class="keyword">if</span>(!rst_n_i)                           <span class="comment">//00 01 10 11 捕捉11  实现8分频</span></span><br><span class="line">		div8_o_r&lt;=<span class="number">1&#x27;b0</span>;</span><br><span class="line">	<span class="keyword">else</span> <span class="keyword">if</span>((~div_cnt1[<span class="number">0</span>]) &amp;&amp; (~div_cnt1[<span class="number">1</span>]))   <span class="comment">//两个&amp;&amp;是逻辑运算</span></span><br><span class="line">		div8_o_r&lt;=~div8_o_r;</span><br><span class="line">	<span class="keyword">else</span></span><br><span class="line">		div8_o_r&lt;=div8_o_r;</span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
 
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/writing.html">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
+<p>第一种分频写法是，将计数器计数和分频器输出写在两个always语句块中。</p>
+<figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//第二种四分频八分频的写法</span></span><br><span class="line"><span class="keyword">reg</span> counter_4;</span><br><span class="line"><span class="keyword">reg</span> [<span class="number">1</span>:<span class="number">0</span>] counter_8;</span><br><span class="line"></span><br><span class="line"><span class="keyword">always</span> @(<span class="keyword">posedge</span> clk_i <span class="keyword">or</span> <span class="keyword">negedge</span> ngrst_i) <span class="keyword">begin</span></span><br><span class="line">	<span class="keyword">if</span>(~ngrst_i) <span class="keyword">begin</span></span><br><span class="line">		counter_4 &lt;= <span class="number">0</span>;</span><br><span class="line">		div4_o = <span class="number">0</span>;</span><br><span class="line">	<span class="keyword">end</span> <span class="keyword">else</span> <span class="keyword">if</span>(counter_4 == <span class="number">1</span>) <span class="keyword">begin</span></span><br><span class="line">		counter_4 &lt;= <span class="number">0</span>;</span><br><span class="line">		div4_o &lt;= ~div4_o;</span><br><span class="line">	<span class="keyword">end</span> <span class="keyword">else</span> <span class="keyword">if</span>(counter_4 == <span class="number">0</span>) <span class="keyword">begin</span></span><br><span class="line">		counter_4 &lt;= counter_4 + <span class="number">1</span>;</span><br><span class="line">	<span class="keyword">end</span></span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">always</span> @(<span class="keyword">posedge</span> clk_i <span class="keyword">or</span> <span class="keyword">negedge</span> ngrst_i) <span class="keyword">begin</span></span><br><span class="line">	<span class="keyword">if</span>(~ngrst_i) <span class="keyword">begin</span></span><br><span class="line">		counter_8 &lt;= <span class="number">0</span>;</span><br><span class="line">		div8_o = <span class="number">0</span>;</span><br><span class="line">	<span class="keyword">end</span> <span class="keyword">else</span> <span class="keyword">if</span>(counter_8 == <span class="number">3</span>) <span class="keyword">begin</span></span><br><span class="line">		counter_8 &lt;= <span class="number">0</span>;</span><br><span class="line">		div8_o &lt;= ~div8_o;</span><br><span class="line">	<span class="keyword">end</span> <span class="keyword">else</span> <span class="keyword">begin</span></span><br><span class="line">		counter_8 &lt;= counter_8 + <span class="number">1</span>;</span><br><span class="line">	<span class="keyword">end</span></span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
 
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/server.html">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
+<p>很显然第二种写法是将计数器计数和分频输出写在了同一个语句块中。</p>
+<p>分析以上两种写法，显然，第一种写法更值得推荐，因为对于四分频和八分频电路，第一种写法共用一个计数器，更节省资源。</p>
+<p><strong>二分频的实现比较简单</strong></p>
+<figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">reg</span> div2_o_r; <span class="comment">//二分频电路实际上不需要过于复杂 不需要计数器进行计数</span></span><br><span class="line"><span class="keyword">always</span>@(<span class="keyword">posedge</span> clk_i <span class="keyword">or</span> <span class="keyword">negedge</span> rst_n_i)</span><br><span class="line"><span class="keyword">begin</span></span><br><span class="line">	<span class="keyword">if</span>(!rst_n_i)</span><br><span class="line">		div2_o_r&lt;=<span class="number">1&#x27;b0</span>;</span><br><span class="line">	<span class="keyword">else</span> </span><br><span class="line">		div2_o_r&lt;=~div2_o_r;</span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
 
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/generating.html">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
+<h3 id="2-需要多个计数器搞定：奇数次分频"><a href="#2-需要多个计数器搞定：奇数次分频" class="headerlink" title="2.需要多个计数器搞定：奇数次分频"></a>2.需要多个计数器搞定：奇数次分频</h3><p>这里那三分频来举例，一般来说，三分频电路需要两个计数器，一个用来记录上升沿，两一个用来记录下降沿；分频器的输出也是两个分支输出相或的结果。</p>
+<figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//三分频电路的实现</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">reg</span> [<span class="number">1</span>:<span class="number">0</span>] pos_cnt;  <span class="comment">//上升沿计数</span></span><br><span class="line"><span class="keyword">reg</span> [<span class="number">1</span>:<span class="number">0</span>] neg_cnt;  <span class="comment">//下降沿计数</span></span><br><span class="line"> </span><br><span class="line"><span class="keyword">always</span>@(<span class="keyword">posedge</span> clk <span class="keyword">or</span> <span class="keyword">negedge</span> rst_n)  <span class="comment">//上升沿;复位清零;计到2清零</span></span><br><span class="line"><span class="keyword">begin</span></span><br><span class="line">	<span class="keyword">if</span>(!rst_n)</span><br><span class="line">		pos_cnt&lt;=<span class="number">2&#x27;b00</span>;</span><br><span class="line">	<span class="keyword">else</span> <span class="keyword">if</span>(pos_cnt==<span class="number">2&#x27;d2</span>)</span><br><span class="line">		pos_cnt&lt;=<span class="number">2&#x27;b00</span>;</span><br><span class="line">	<span class="keyword">else</span></span><br><span class="line">		pos_cnt&lt;=pos_cnt+<span class="number">1&#x27;b1</span>;</span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"> </span><br><span class="line"><span class="keyword">always</span>@(<span class="keyword">negedge</span> clk <span class="keyword">or</span> <span class="keyword">negedge</span> rst_n)  <span class="comment">//下降沿;复位清零;计到2清零</span></span><br><span class="line"><span class="keyword">begin</span></span><br><span class="line">	<span class="keyword">if</span>(!rst_n)	</span><br><span class="line">		neg_cnt&lt;=<span class="number">2&#x27;b00</span>;</span><br><span class="line">	<span class="keyword">else</span> <span class="keyword">if</span>(neg_cnt==<span class="number">2&#x27;d2</span>)</span><br><span class="line">		neg_cnt&lt;=<span class="number">2&#x27;b00</span>;</span><br><span class="line">	<span class="keyword">else</span></span><br><span class="line">		neg_cnt&lt;=neg_cnt+<span class="number">1&#x27;b1</span>;</span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"> </span><br><span class="line"><span class="keyword">reg</span> div3_o_r0;</span><br><span class="line"><span class="keyword">reg</span> div3_o_r1;</span><br><span class="line"> </span><br><span class="line"><span class="keyword">always</span>@(<span class="keyword">posedge</span> clk <span class="keyword">or</span> <span class="keyword">negedge</span> rst_n)</span><br><span class="line"><span class="keyword">begin</span></span><br><span class="line">	<span class="keyword">if</span>(!rst_n)</span><br><span class="line">		div3_o_r0&lt;=<span class="number">1&#x27;b0</span>;</span><br><span class="line">	<span class="keyword">else</span> <span class="keyword">if</span>(pos_cnt&lt;<span class="number">2&#x27;d1</span>)</span><br><span class="line">		div3_o_r0&lt;=<span class="number">1&#x27;b1</span>;</span><br><span class="line">	<span class="keyword">else</span></span><br><span class="line">		div3_o_r0&lt;=<span class="number">1&#x27;b0</span>;</span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"> </span><br><span class="line"><span class="keyword">always</span>@(<span class="keyword">negedge</span> clk <span class="keyword">or</span> <span class="keyword">negedge</span> rst_n)</span><br><span class="line"><span class="keyword">begin</span></span><br><span class="line">	<span class="keyword">if</span>(!rst_n)</span><br><span class="line">		div3_o_r1&lt;=<span class="number">1&#x27;b0</span>;</span><br><span class="line">	<span class="keyword">else</span> <span class="keyword">if</span>(neg_cnt&lt;<span class="number">2&#x27;d1</span>)	</span><br><span class="line">		div3_o_r1&lt;=<span class="number">1&#x27;b1</span>;</span><br><span class="line">	<span class="keyword">else</span></span><br><span class="line">		div3_o_r1&lt;=<span class="number">1&#x27;b0</span>;</span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"> </span><br><span class="line"><span class="keyword">assign</span> div3_o=div3_o_r0 | div3_o_r1;</span><br></pre></td></tr></table></figure>
 
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>
+<p>下面的代码也可以实现三分频输出，但实际上这样的写法是错误的，仿真可以通过，但是不可综合：</p>
+<figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">reg</span> [<span class="number">2</span>:<span class="number">0</span>] counter_3;</span><br><span class="line"></span><br><span class="line"><span class="keyword">always</span> @(<span class="keyword">posedge</span> clk_i <span class="keyword">or</span> <span class="keyword">negedge</span> ngrst_i <span class="keyword">or</span> <span class="keyword">negedge</span> clk_i) <span class="keyword">begin</span></span><br><span class="line">	<span class="keyword">if</span>(~ngrst_i) <span class="keyword">begin</span></span><br><span class="line">		counter_3 &lt;= <span class="number">0</span>;</span><br><span class="line">		div3_o = <span class="number">0</span>;</span><br><span class="line">	<span class="keyword">end</span> <span class="keyword">else</span> <span class="keyword">if</span>(counter_3 == <span class="number">2</span>) <span class="keyword">begin</span></span><br><span class="line">		counter_3 &lt;= <span class="number">0</span>;</span><br><span class="line">		div3_o &lt;= ~div3_o;</span><br><span class="line">	<span class="keyword">end</span> <span class="keyword">else</span> <span class="keyword">begin</span></span><br><span class="line">		counter_3 &lt;= counter_3 + <span class="number">1</span>;</span><br><span class="line">	<span class="keyword">end</span></span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
+
+<p>注意：不可以在同一个always语句块中同时监测时钟的上升沿和下降沿。因为不可综合。</p>
+<h3 id="3-FPGA的时钟频率为50MHz，产生频率2hz的时钟"><a href="#3-FPGA的时钟频率为50MHz，产生频率2hz的时钟" class="headerlink" title="3.FPGA的时钟频率为50MHz，产生频率2hz的时钟"></a>3.FPGA的时钟频率为50MHz，产生频率2hz的时钟</h3><p>1/50M = 0.02 * 10^(-6) s = 20ns </p>
+<p>1/2 = 0.5s = 0.5 * 10^9 ns = 5 * 10^8 ns</p>
+<p>(5 * 10^8 ns) / 20 = 2500_0000 </p>
+<p>如果占空比为50%，则计数器每计到 12_499999 和 24_999999 的时候，时钟输出翻转一次。</p>
+<figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">reg</span> [<span class="number">25</span>:<span class="number">0</span>] div2hz_cnt;</span><br><span class="line"></span><br><span class="line"><span class="keyword">always</span>@(<span class="keyword">posedge</span> clk_i <span class="keyword">or</span> <span class="keyword">negedge</span> rst_n_i)</span><br><span class="line"><span class="keyword">begin</span></span><br><span class="line">	<span class="keyword">if</span>(!rst_n_i)</span><br><span class="line">		div2hz_o_r&lt;=<span class="number">0</span>;</span><br><span class="line">	<span class="keyword">else</span> <span class="keyword">if</span>(div2hz_cnt==<span class="number">26&#x27;d12_499999</span> || div2hz_cnt==<span class="number">26&#x27;d24_999999</span>)</span><br><span class="line">		div2hz_o_r&lt;=~div2hz_o_r;</span><br><span class="line">	<span class="keyword">else</span></span><br><span class="line">		div2hz_o_r&lt;=div2hz_o_r;</span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
+
 
       
 
@@ -263,79 +273,7 @@
 
       
         <p class="article-more-link">
-          <a class="article-more-a" href="/2021/03/29/hello-world/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-Some-tips-for-Hexo" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2021/03/29/Some-tips-for-Hexo/">Some tips for Hexo</a>
-    </h1>
-  
-
-        
-        <a href="/2021/03/29/Some-tips-for-Hexo/" class="archive-article-date">
-  	<time datetime="2021-03-28T16:00:02.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-03-29</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="几点需要注意的："><a href="#几点需要注意的：" class="headerlink" title="几点需要注意的："></a>几点需要注意的：</h2><ol>
-<li><p>新建文档</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo n &quot;blog_name&quot;</span><br></pre></td></tr></table></figure></li>
-<li><p>生成静态文件</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">hexo clean</span><br><span class="line">hexo g</span><br></pre></td></tr></table></figure></li>
-<li><p>本地运行</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo s</span><br></pre></td></tr></table></figure></li>
-<li><p>部署到github</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 有时需要重置http</span> </span><br><span class="line">git config --global --unset http.proxy</span><br><span class="line">hexo clean</span><br><span class="line">hexo d</span><br></pre></td></tr></table></figure></li>
-</ol>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2021/03/29/Some-tips-for-Hexo/">展开全文 >></a>
+          <a class="article-more-a" href="/2021/04/26/%E5%88%86%E9%A2%91%E5%99%A8-md/">展开全文 >></a>
         </p>
       
 
@@ -486,6 +424,91 @@
       
         <p class="article-more-link">
           <a class="article-more-a" href="/2021/01/01/%E5%8A%9B%E6%89%A3%E5%88%B7%E9%A2%98%E6%80%BB%E7%BB%93/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-Some-tips-for-Hexo" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/03/29/Some-tips-for-Hexo/">Some tips for Hexo</a>
+    </h1>
+  
+
+        
+        <a href="/2019/03/29/Some-tips-for-Hexo/" class="archive-article-date">
+  	<time datetime="2019-03-28T16:00:02.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-03-29</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="几点需要注意的："><a href="#几点需要注意的：" class="headerlink" title="几点需要注意的："></a>几点需要注意的：</h2><ol>
+<li><p>新建文档</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo n &quot;blog_name&quot;</span><br></pre></td></tr></table></figure></li>
+<li><p>生成静态文件</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">hexo clean</span><br><span class="line">hexo g</span><br></pre></td></tr></table></figure></li>
+<li><p>本地运行</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo s</span><br></pre></td></tr></table></figure></li>
+<li><p>部署到github</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 有时需要重置http</span> </span><br><span class="line">git config --global --unset http.proxy</span><br><span class="line">hexo clean</span><br><span class="line">hexo d</span><br></pre></td></tr></table></figure></li>
+</ol>
+<p>Welcome to <a target="_blank" rel="noopener" href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a target="_blank" rel="noopener" href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a target="_blank" rel="noopener" href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a target="_blank" rel="noopener" href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
+<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre></td></tr></table></figure>
+
+<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/writing.html">Writing</a></p>
+<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
+
+<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/server.html">Server</a></p>
+<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
+
+<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/generating.html">Generating</a></p>
+<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
+
+<p>More info: [Deployment](</p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2019/03/29/Some-tips-for-Hexo/">展开全文 >></a>
         </p>
       
 
