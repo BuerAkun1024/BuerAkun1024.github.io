@@ -175,7 +175,11 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h3 id="Name：BuerAkun"><a href="#Name：BuerAkun" class="headerlink" title="Name：BuerAkun"></a>Name：BuerAkun</h3>
+        <h3 id="Name：BuerAkun"><a href="#Name：BuerAkun" class="headerlink" title="Name：BuerAkun"></a>Name：BuerAkun</h3><ul>
+<li>兴趣方向：基于FPGA的图像处理</li>
+<li>微信/手机：15261861168</li>
+</ul>
+
       
 
       
@@ -303,6 +307,178 @@
 
 
   
+    <article id="post-状态机" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/10/27/%E7%8A%B6%E6%80%81%E6%9C%BA/">状态机</a>
+    </h1>
+  
+
+        
+        <a href="/2019/10/27/%E7%8A%B6%E6%80%81%E6%9C%BA/" class="archive-article-date">
+  	<time datetime="2019-10-27T02:10:07.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-10-27</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="三段式状态机"><a href="#三段式状态机" class="headerlink" title="三段式状态机"></a>三段式状态机</h3><p>三段式代码多，但是有时钟同步，延时少，组合逻辑跟时序逻辑分开并行出错少</p>
+<p><strong>(1)同步状态转移</strong> </p>
+<p><strong>(2)当前状态判断接下来的状态</strong></p>
+<p><strong>(3)动作输出</strong></p>
+<p>如果程序复杂可以不止三个always  。always 后常接case  case必须有default  ，对于FPGA常用  状态数较少，独热码编码 ，或者格雷码</p>
+<p><strong>//独热码编码</strong></p>
+<figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">parameter</span> NO_KEY_PRESSED = <span class="number">6&#x27;b000_001</span>; <span class="comment">// 没有按键按下</span></span><br><span class="line"><span class="keyword">parameter</span> SCAN_row0 = <span class="number">6&#x27;b000_010</span>; <span class="comment">// 扫描第0行</span></span><br><span class="line"><span class="keyword">parameter</span> SCAN_row1 = <span class="number">6&#x27;b000_100</span>; <span class="comment">// 扫描第1行</span></span><br><span class="line"><span class="keyword">parameter</span> SCAN_row2 = <span class="number">6&#x27;b001_000</span>; <span class="comment">// 扫描第2行</span></span><br><span class="line"><span class="keyword">parameter</span> SCAN_row3 = <span class="number">6&#x27;b010_000</span>; <span class="comment">// 扫描第3行</span></span><br><span class="line"><span class="keyword">parameter</span> KEY_PRESSED = <span class="number">6&#x27;b100_000</span>; <span class="comment">// 有按键按下</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">reg</span> [<span class="number">5</span>:<span class="number">0</span>] current_state, next_state; <span class="comment">// 现态、次态</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>（1）第一个always模块，格式化描述次态寄存器迁移到现态寄存器</strong></p>
+<figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">always</span> @ (<span class="keyword">posedge</span> key_clk, <span class="keyword">negedge</span> rst_n) <span class="comment">//异步复位</span></span><br><span class="line"><span class="keyword">if</span> (!rst_n)</span><br><span class="line">current_state &lt;= NO_KEY_PRESSED;<span class="comment">//初始化按键没按下 //默认状态</span></span><br><span class="line"><span class="keyword">else</span></span><br><span class="line">current_state &lt;= next_state;    <span class="comment">//注意，使用的是非阻塞赋值</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>（2）第二个进程，组合逻辑always模块，描述状态转移条件判断用current_state</strong></p>
+<figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">always</span> @ (current_state) <span class="comment">//电平触发      或者always @ *</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">begin</span></span><br><span class="line"></span><br><span class="line">next_state = x; <span class="comment">//要初始化，使得系统复位后能进入正确的状态</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">case</span>(current_state)</span><br><span class="line"></span><br><span class="line">S1: <span class="keyword">if</span>(...)</span><br><span class="line"></span><br><span class="line">next_state = S2;     <span class="comment">//阻塞赋值</span></span><br><span class="line"></span><br><span class="line">...</span><br><span class="line"></span><br><span class="line"><span class="keyword">endcase</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>(3)第三个进程，同步时序always模块，描述次态寄存器输出</strong></p>
+<figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">always</span> @ (<span class="keyword">posedge</span> clk <span class="keyword">or</span> <span class="keyword">negedge</span> rst_n)</span><br><span class="line"></span><br><span class="line">...<span class="comment">//初始化</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">case</span>(next_state)</span><br><span class="line"></span><br><span class="line">S1:</span><br><span class="line"></span><br><span class="line">out1 &lt;= <span class="number">1&#x27;b1</span>; <span class="comment">//注意是非阻塞逻辑</span></span><br><span class="line"></span><br><span class="line">S2:</span><br><span class="line"></span><br><span class="line">out2 &lt;= <span class="number">1&#x27;b1</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">default</span>:... <span class="comment">//default的作用是免除综合工具综合出锁存器。</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">endcase</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>三段式并不是一定要写为3个always块，如果状态机更复杂，就不止3段了。</strong></p>
+<p><strong>1. 三段always模块中，第一个和第三个always模块是同步时序always模块，用非阻塞赋值(“ &lt;= ”)；第二个always模块是组合逻辑always模块，用阻塞赋值(“ = ”)。</strong></p>
+<p><strong>2. 第二部分为组合逻辑always模块，为了抑制warning信息，对于always的敏感列表建议采用always@（*）的方式。</strong></p>
+<p><strong>3. 第二部分，组合逻辑always模块，里面判断条件一定要包含所有情况！可以用else保证包含完全。</strong></p>
+<p><strong>4. 第二部分，组合逻辑电平要维持超过一个clock，仿真时注意。</strong></p>
+<p><strong>5. 需要注意：第二部分case中的条件应该为当前态（current_state）。</strong></p>
+<p><strong>6. 第三部分case中的条件应该为次态(next_state)。</strong></p>
+<p><strong>7. 编码原则，binary和gray-code适用于触发器资源较少，组合电路资源丰富的情况（CPLD），对于FPGA，适用one-hot code。这样不但充分利用FPGA丰富的触发器资源，还因为只需比较一个bit，速度快，组合电路简单。</strong></p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2019/10/27/%E7%8A%B6%E6%80%81%E6%9C%BA/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-Some-tips-for-Hexo" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/03/29/Some-tips-for-Hexo/">Some tips for Hexo</a>
+    </h1>
+  
+
+        
+        <a href="/2019/03/29/Some-tips-for-Hexo/" class="archive-article-date">
+  	<time datetime="2019-03-28T16:00:02.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-03-29</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="几点需要注意的："><a href="#几点需要注意的：" class="headerlink" title="几点需要注意的："></a>几点需要注意的：</h2><ol>
+<li><p>新建文档</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo n &quot;blog_name&quot;</span><br></pre></td></tr></table></figure></li>
+<li><p>生成静态文件</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">hexo clean</span><br><span class="line">hexo g</span><br></pre></td></tr></table></figure></li>
+<li><p>本地运行</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo s</span><br></pre></td></tr></table></figure></li>
+<li><p>部署到github</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 有时需要重置http</span> </span><br><span class="line">git config --global --unset http.proxy</span><br><span class="line">hexo clean</span><br><span class="line">hexo d</span><br></pre></td></tr></table></figure></li>
+</ol>
+<p>Welcome to <a target="_blank" rel="noopener" href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a target="_blank" rel="noopener" href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a target="_blank" rel="noopener" href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a target="_blank" rel="noopener" href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
+<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre></td></tr></table></figure>
+
+<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/writing.html">Writing</a></p>
+<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
+
+<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/server.html">Server</a></p>
+<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
+
+<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/generating.html">Generating</a></p>
+<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
+
+<p>More info: [Deployment](</p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2019/03/29/Some-tips-for-Hexo/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-力扣刷题总结" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -310,13 +486,13 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2021/01/01/%E5%8A%9B%E6%89%A3%E5%88%B7%E9%A2%98%E6%80%BB%E7%BB%93/">力扣刷题总结</a>
+      <a class="article-title" href="/2019/01/01/%E5%8A%9B%E6%89%A3%E5%88%B7%E9%A2%98%E6%80%BB%E7%BB%93/">力扣刷题总结</a>
     </h1>
   
 
         
-        <a href="/2021/01/01/%E5%8A%9B%E6%89%A3%E5%88%B7%E9%A2%98%E6%80%BB%E7%BB%93/" class="archive-article-date">
-  	<time datetime="2020-12-31T16:00:02.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-01-01</time>
+        <a href="/2019/01/01/%E5%8A%9B%E6%89%A3%E5%88%B7%E9%A2%98%E6%80%BB%E7%BB%93/" class="archive-article-date">
+  	<time datetime="2018-12-31T16:00:02.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-01-01</time>
 </a>
         
       </header>
@@ -423,92 +599,7 @@
 
       
         <p class="article-more-link">
-          <a class="article-more-a" href="/2021/01/01/%E5%8A%9B%E6%89%A3%E5%88%B7%E9%A2%98%E6%80%BB%E7%BB%93/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-Some-tips-for-Hexo" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/03/29/Some-tips-for-Hexo/">Some tips for Hexo</a>
-    </h1>
-  
-
-        
-        <a href="/2019/03/29/Some-tips-for-Hexo/" class="archive-article-date">
-  	<time datetime="2019-03-28T16:00:02.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-03-29</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="几点需要注意的："><a href="#几点需要注意的：" class="headerlink" title="几点需要注意的："></a>几点需要注意的：</h2><ol>
-<li><p>新建文档</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo n &quot;blog_name&quot;</span><br></pre></td></tr></table></figure></li>
-<li><p>生成静态文件</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">hexo clean</span><br><span class="line">hexo g</span><br></pre></td></tr></table></figure></li>
-<li><p>本地运行</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo s</span><br></pre></td></tr></table></figure></li>
-<li><p>部署到github</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 有时需要重置http</span> </span><br><span class="line">git config --global --unset http.proxy</span><br><span class="line">hexo clean</span><br><span class="line">hexo d</span><br></pre></td></tr></table></figure></li>
-</ol>
-<p>Welcome to <a target="_blank" rel="noopener" href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a target="_blank" rel="noopener" href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a target="_blank" rel="noopener" href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a target="_blank" rel="noopener" href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/writing.html">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/server.html">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/generating.html">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-
-<p>More info: [Deployment](</p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2019/03/29/Some-tips-for-Hexo/">展开全文 >></a>
+          <a class="article-more-a" href="/2019/01/01/%E5%8A%9B%E6%89%A3%E5%88%B7%E9%A2%98%E6%80%BB%E7%BB%93/">展开全文 >></a>
         </p>
       
 
